@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "1dce7655-4a7d-423e-bca8-b1a8439e1c75",
+		"name": "lms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "books list/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Krishnas tale 3",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "2",
+							"description": "author id",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authors retrieve/update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Krishna Prasad",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/authors/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authors",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authors list/create",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Krishna",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/authors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "books retieve/update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "krishna's Tale 1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/books/26",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"books",
+						"26"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "collections list/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "krishna's triology",
+							"type": "text"
+						},
+						{
+							"key": "books",
+							"value": "26,27,28",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/collections",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"collections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "collections retieve/update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "krishna's collection",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/collections/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"collections",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/qsearch?q=author&keyword=krishna",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"qsearch"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "author",
+							"description": "book / author / collection"
+						},
+						{
+							"key": "keyword",
+							"value": "krishna"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

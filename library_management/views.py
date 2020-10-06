@@ -2,10 +2,11 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, get_object_or_404, \
-                                    RetrieveUpdateDestroyAPIView
+    RetrieveUpdateDestroyAPIView
 from .serializers import *
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
+from .services import keyword_search
 
 
 class BooksView(APIView):
@@ -100,24 +101,20 @@ class GeneralSearchView(APIView):
         authors = Author.objects.filter(name__icontains=keyword)
         return Response({
                         "books": BookSerializer(books, many=True).data,
-                        "collections": BookCollectionSerializer(collections, many=True).data,
+                        "collections": BookCollectionSerializer(
+                            collections, many=True).data,
                         "Authors": AuthorSerializer(authors, many=True).data
                         })
 
 
 class SearchView(APIView):
     def get(self, request):
-        keyword = request.GET.get('keyword')
-        query = request.GET.get('q')
-        if query == 'book':
-            books = Book.objects.filter(name__icontains=keyword)
-        elif query == 'author':
-            books = Book.objects.filter(author__name__icontains=keyword)
-        elif query == 'collection':
-            books = Book.objects.filter(collection__name__icontains=keyword)
+        result = keyword_search(request.GET.get(
+            'keyword'), request.GET.get('q'))
+        if result:
+            return Response({"books": BookSerializer(result, many=True).data},
+                            status=200)
         else:
             return Response({
                 "Enter a valid query attribute"
             }, status=400)
-        return Response({"books": BookSerializer(books, many=True).data}, status=200)
-        

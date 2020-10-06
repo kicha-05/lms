@@ -18,8 +18,8 @@ class BooksView(APIView):
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 class BookDetail(APIView):
@@ -73,8 +73,8 @@ class BookCollectionView(APIView):
                     collection.books.add(int(book))
             except:
                 pass
-            return Response(serializer.data)
-        return Response(serializer.errors)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 class BookCollectionDetail(APIView):
@@ -118,5 +118,6 @@ class SearchView(APIView):
         else:
             return Response({
                 "Enter a valid query attribute"
-            })
-        return Response({"books": BookSerializer(books, many=True).data})
+            }, status=400)
+        return Response({"books": BookSerializer(books, many=True).data}, status=200)
+        
